@@ -10,12 +10,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Leanne James Line 13
-    // Mikä line 14
 
 
 
-    // dkaldkladkl
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +25,5 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //line 27
-
-        // Line 32
     }
 }
