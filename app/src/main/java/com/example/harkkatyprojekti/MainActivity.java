@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Leanne James Line 13
+    // Mikä line 14
+
 
 
     // dkaldkladkl
