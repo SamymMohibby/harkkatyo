@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentVertailu">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <!-- Input fields for the municipalities -->
+    <EditText
+        android:id="@+id/editText_municipality1"
+        android:layout_width="384dp"
+        android:layout_height="61dp"
+        android:hint="Kunta 1" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/editText_municipality2"
+        android:layout_width="384dp"
+        android:layout_height="61dp"
+        android:hint="Kunta 2" />
+
+    <!-- Button to trigger data comparison -->
+    <Button
+        android:id="@+id/btnVertaile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Vertaile" />
+
+    <!-- Container for the first municipality data -->
+    <LinearLayout
+        android:layout_width="381dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_municipality1_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="First Municipality"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_municipality1_population"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Population: -" />
+
+        <TextView
+            android:id="@+id/textView_municipality1_temperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Temperature: -" />
+    </LinearLayout>
+
+    <!-- Container for the second municipality data -->
+    <LinearLayout
+        android:layout_width="381dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_municipality2_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Second Municipality"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_municipality2_population"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Population: -" />
+
+        <TextView
+            android:id="@+id/textView_municipality2_temperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Temperature: -" />
+    </LinearLayout>
+
+</LinearLayout>
