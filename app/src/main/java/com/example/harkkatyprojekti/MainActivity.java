@@ -9,8 +9,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    //Kommentti1 askndansd asojdioa
-    //öaksjdioa
+
+
+
+    // dkaldkladkl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
