@@ -17,7 +17,7 @@
         android:id="@+id/btnHaeTiedot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="switchToAddUser"
+        android:onClick="switchToTabactivity"
         android:text="Hae tiedot" />
 
     <!-- Label for recently searched -->
