@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void switchToTabactivity(View view) {
+
+        // dadada
         Context context = this;
 
         MunicipalityDataRetriever mr = new MunicipalityDataRetriever();
