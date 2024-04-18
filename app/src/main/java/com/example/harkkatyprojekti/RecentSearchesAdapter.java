@@ -1,6 +1,7 @@
 package com.example.harkkatyprojekti;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,9 @@ public class RecentSearchesAdapter extends RecyclerView.Adapter<RecentSearchesAd
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        String search = recentSearches.get(position);
-        holder.searchTextView.setText(search);
+        String searchTerm = recentSearches.get(position);
+        Log.d("RecentSearchAdapter", "Binding view holder for position " + position + " with search term: " + searchTerm);
+        holder.searchTextView.setText(searchTerm);
     }
 
     @Override
@@ -43,7 +45,7 @@ public class RecentSearchesAdapter extends RecyclerView.Adapter<RecentSearchesAd
 
         SearchViewHolder(View itemView) {
             super(itemView);
-            searchTextView = itemView.findViewById(R.id.txt_recent_search);
+            searchTextView = itemView.findViewById(R.id.txtRecentSearch);
         }
     }
 }
