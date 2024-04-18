@@ -15,13 +15,13 @@ public class TabPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new FragmentPerusTiedot();
+                return new FragmentPerustiedot();
             case 1:
                 return new FragmentVertailu();
             case 2:
                 return new FragmentVisa();
             default:
-                return new FragmentPerusTiedot();
+                return new FragmentPerustiedot();
 
 
         }
