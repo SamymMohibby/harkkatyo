@@ -10,9 +10,7 @@
     tools:context=".MainActivity">
 
 
-    <!-- Search bar section -->
 
-    <!-- Label for recently searched -->
 
     <EditText
         android:id="@+id/txtKunta"
@@ -61,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.0"
-        android:background="#FFC0CB"/>
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

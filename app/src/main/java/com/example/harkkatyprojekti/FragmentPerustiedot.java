@@ -20,14 +20,10 @@ public class FragmentPerustiedot extends Fragment {
         textViewPopulation = view.findViewById(R.id.textPopulation);
         return view;
     }
-
     public void updatePopulationData(String data) {
         if (textViewPopulation != null) {
             textViewPopulation.setText(data);
         }
     }
-
-
-
 
 }

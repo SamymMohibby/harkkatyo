@@ -8,16 +8,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecentSearchesAdapter extends RecyclerView.Adapter<RecentSearchesAdapter.SearchViewHolder> {
-
-    private final List<String> recentSearches;
+    private Context context;
+    private final ArrayList<String> recentSearches;
     private final LayoutInflater mInflater;
 
     public RecentSearchesAdapter(Context context, List<String> recentSearches) {
+        this.context = context;
         mInflater = LayoutInflater.from(context);
-        this.recentSearches = recentSearches;
+        this.recentSearches = (ArrayList<String>) recentSearches;
     }
 
     @NonNull
@@ -37,11 +40,11 @@ public class RecentSearchesAdapter extends RecyclerView.Adapter<RecentSearchesAd
 
     @Override
     public int getItemCount() {
-        return recentSearches != null ? recentSearches.size() : 0;
+        return recentSearches.size();
     }
 
     static class SearchViewHolder extends RecyclerView.ViewHolder {
-        final TextView searchTextView;
+        TextView searchTextView;
 
         SearchViewHolder(View itemView) {
             super(itemView);
