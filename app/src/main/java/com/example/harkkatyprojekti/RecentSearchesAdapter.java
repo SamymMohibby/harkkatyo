@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class RecentSearchesAdapter extends RecyclerView.Adapter<RecentSearchesAdapter.SearchViewHolder> {
 
     private final List<String> recentSearches;
     private final LayoutInflater mInflater;
