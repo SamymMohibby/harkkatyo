@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +38,14 @@ public class FragmentPerustiedot extends Fragment {
         textViewWeather.setText(weatherData);
         activity = (TabActivity) getActivity();
         if (activity != null) {
+            String mName = activity.getMunicipalityName();
             textViewPopulation.setText(activity.sendMpData());
             textViewWeather.setText(activity.sendWeatherData());
             textMunicipalityName.setText(activity.getMunicipalityName());
+            Log.d("FragmentPerustiedot", "Activity and data found: " + mName);
+        } else {
+            Log.d("FragmentPerustiedot", "Activity is null");
+
         }
 
         return view;

@@ -1,6 +1,8 @@
 package com.example.harkkatyprojekti;
 
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
@@ -16,6 +18,7 @@ public class TabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
         municipalityName = getIntent().getStringExtra("MUNICIPALITY_NAME");
+        Log.d("TabActivity", "Received Municipality Name: " + municipalityName);
 
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
