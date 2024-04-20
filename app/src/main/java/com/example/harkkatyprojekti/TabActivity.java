@@ -13,6 +13,9 @@ import com.google.android.material.tabs.TabLayout;
 
 public class TabActivity extends AppCompatActivity {
 
+    private String municipalityData;
+    private String weatherData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,10 @@ public class TabActivity extends AppCompatActivity {
         ViewPager2 fragmentArea = findViewById(R.id.viewArea);
         TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(this);
         fragmentArea.setAdapter(tabPagerAdapter);
+
+        municipalityData = getIntent().getStringExtra("population");
+        weatherData = getIntent().getStringExtra("weatherData");
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -52,5 +59,9 @@ public class TabActivity extends AppCompatActivity {
                 tabLayout.getTabAt(position).select();
             }
         });
+    }
+
+    public String sendMpData() {
+        return municipalityData;
     }
 }

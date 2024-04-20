@@ -14,7 +14,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText txtKunta;
+
+    // TODO vaihoin edittextin id: aluksi oli txtKunta nyt on txtMunicipality
+    // TODO koska kaikki koodit pitää olla kai kirjoitettu englanniksi
+    private EditText txtMunicipality;
     private RecyclerView recyclerView;
     private RecentSearchesAdapter adapter; // Ensure this is the adapter you use everywhere in this class
     private List<String> recentSearchList;
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtKunta = findViewById(R.id.txtKunta);
+        txtMunicipality = findViewById(R.id.txtMunicipality);
         recyclerView = findViewById(R.id.rvViimeksiHaetut);
         adapter = new RecentSearchesAdapter(this, recentSearchList);
         recyclerView.setAdapter(adapter);
@@ -45,48 +48,79 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void switchToTabactivity(View view) {
+        // vaihtaa aktiviteetti tabaktiviteetille
+        Intent intent = new Intent(this, TabActivity.class);
 
-        // dadada
         Context context = this;
 
         MunicipalityDataRetriever mr = new MunicipalityDataRetriever();
         WeatherDataRetriever wr = new WeatherDataRetriever();
 
-        String location = txtKunta.getText().toString();
+        // hakee käyttäjän syöttämä kunta
+        String location = txtMunicipality.getText().toString();
+
 
         ExecutorService service = Executors.newSingleThreadExecutor();
 
-        service.execute(() -> {
-            ArrayList<MunicipalityData> populationData = mr.getData(context, location);
-            WeatherData weatherData = wr.getWeatherData(location);
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
 
-            if (populationData == null) {
-                return;
+                // luodaan olion ja samalla välitetään tämän luokan context ja käyttäjän haluama kunta
+                ArrayList<MunicipalityData> populationData = mr.getData(context, location);
+                WeatherData weatherData = wr.getWeatherData(location);
+
+                // jos käyttäjän syöttämä kunta on tuntematon, ohjelma kaatu
+                if (populationData == null) {
+                    return;
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String mpData = "";
+                        for (MunicipalityData data : populationData) {
+                            mpData =  mpData + data.getYear() + ": " + data.getPopulation() + "\n";
+                        }
+
+                        Bundle bundle = new Bundle();
+
+                        // lisätään bundleen, municipalitydata ja weatherdata
+                        bundle.putString("population", mpData);
+
+                        // välitetään tiedot toiselle aktiviteetille
+                        intent.putExtra("population", mpData);
+
+
+                        startActivity(intent);
+
+
+                    }
+                });
+
+
+
             }
-            runOnUiThread(() -> {
-                StringBuilder stringBuilder = new StringBuilder();
-                for (MunicipalityData data : populationData) {
-                    stringBuilder.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
-                }
-                FragmentPerustiedot fragment = (FragmentPerustiedot) getSupportFragmentManager().findFragmentById(R.id.fragmentPerustiedot);
-                if (fragment != null) {
-                    fragment.updatePopulationData(stringBuilder.toString());
-                }
-            });
         });
 
-        String searchTerm = txtKunta.getText().toString().trim();
+
+
+
+        // pääty tähän
+
+       /* String searchTerm = txtMunicipality.getText().toString().trim();
         if (!searchTerm.isEmpty()) {
             updateRecentSearches(searchTerm);
             Intent intent = new Intent(this, TabActivity.class);
             intent.putExtra("SEARCH_TERM", searchTerm);
             startActivity(intent);
         } else {
-            txtKunta.setError("Please enter a search term");
-        }
+            txtMunicipality.setError("Please enter a search term");
+        } */
+
     }
 
-    private void updateRecentSearches(String searchTerm) {
+    /* private void updateRecentSearches(String searchTerm) {
         recentSearchList.add(0, searchTerm);
 
         // Limit to any number of recent searches you prefer, here no limit
@@ -95,5 +129,6 @@ public class MainActivity extends AppCompatActivity {
         }
         PreferencesUtil.saveRecentSearches(this, recentSearchList);
         adapter.notifyDataSetChanged();
-    }
+    } */
+
 }

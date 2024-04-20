@@ -12,18 +12,25 @@ import android.widget.TextView;
 
 public class FragmentPerustiedot extends Fragment {
     private TextView textViewPopulation;
+    private TextView textViewWeather;
+
+    private TabActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perus_tiedot, container, false);
+
+
+
+        TabActivity activity = (TabActivity) getActivity();
+        String municipalityData = activity.sendMpData();
+
         textViewPopulation = view.findViewById(R.id.textPopulation);
+        textViewPopulation.setText(municipalityData);
+
+
         return view;
-    }
-    public void updatePopulationData(String data) {
-        if (textViewPopulation != null) {
-            textViewPopulation.setText(data);
-        }
     }
 
 }

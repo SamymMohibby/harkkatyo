@@ -13,7 +13,7 @@
 
 
     <EditText
-        android:id="@+id/txtKunta"
+        android:id="@+id/txtMunicipality"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Kunta"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtKunta" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMunicipality" />
 
     <TextView
         android:id="@+id/textView"
