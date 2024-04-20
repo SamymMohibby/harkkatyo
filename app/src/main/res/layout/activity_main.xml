@@ -10,13 +10,12 @@
     tools:context=".MainActivity">
 
 
-
-
     <EditText
-        android:id="@+id/txtKunta"
+        android:id="@+id/txtMunicipality"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Kunta"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtKunta" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMunicipality" />
 
     <TextView
         android:id="@+id/textView"
@@ -48,22 +47,23 @@
         app:layout_constraintTop_toBottomOf="@+id/btnHaeTiedot" />
 
     <LinearLayout
-        android:layout_width="377dp"
-        android:layout_height="403dp"
+        android:layout_width="357dp"
+        android:layout_height="215dp"
+        android:layout_marginTop="224dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvViimeksiHaetut"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/rvRecentSearches"
+            android:layout_width="366dp"
+            android:layout_height="207dp"
             android:scrollbars="vertical"
             tools:layout_editor_absoluteX="19dp"
             tools:layout_editor_absoluteY="217dp" />
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

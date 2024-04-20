@@ -16,7 +16,6 @@ public class Search {
     }
 
 
-
     public String getCityName() {
         return cityName;
     }

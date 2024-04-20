@@ -1,12 +1,10 @@
 package com.example.harkkatyprojekti;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,20 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements RecentSearchesAdapter.OnItemClickListener{
-    private EditText txtKunta;
+    private EditText txtMunicipality;
     private RecyclerView recyclerView;
-    private RecentSearchesAdapter adapter; // Ensure this is the adapter you use everywhere in this class
-
     private String timeStampString;
-
-    private String location ;
+    private String location;
     private RecentSearchesData recentSearchesData;
     private Button buttonSearch;
     private String searchTerm;
@@ -39,62 +35,72 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtKunta = findViewById(R.id.txtKunta);
-        recyclerView = findViewById(R.id.rvViimeksiHaetut);
-
+        txtMunicipality = findViewById(R.id.txtMunicipality);
+        recyclerView = findViewById(R.id.rvRecentSearches);
         buttonSearch = findViewById(R.id.btnHaeTiedot);
-
-
-
         updateRecentSearches();
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "Nappia painettu!", Toast.LENGTH_SHORT).show();
                 switchToTabactivity();
             }
         });
 
 
     }
-
     public void switchToTabactivity() {
-
-
-        // dadada
+        Intent intent = new Intent(this, TabActivity.class);
         Context context = this;
-
         MunicipalityDataRetriever mr = new MunicipalityDataRetriever();
         WeatherDataRetriever wr = new WeatherDataRetriever();
-
-         location = txtKunta.getText().toString().trim();
-
+        location = txtMunicipality.getText().toString().trim();
+        intent.putExtra("MUNICIPALITY NAME", location);
         ExecutorService service = Executors.newSingleThreadExecutor();
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<MunicipalityData> populationData = mr.getData(context, location);
+                WeatherData weatherData = wr.getWeatherData(location);
 
-        service.execute(() -> {
-            ArrayList<MunicipalityData> populationData = mr.getData(context, location);
-            WeatherData weatherData = wr.getWeatherData(location);
+                if (populationData == null) {
+                    return;
+                }
+                // Sort the population data in descending order by year
+                Collections.sort(populationData, new Comparator<MunicipalityData>() {
+                    @Override
+                    public int compare(MunicipalityData md1, MunicipalityData md2) {
+                        return Integer.compare(md2.getYear(), md1.getYear()); // Note the order of md2 and md1 is switched
+                    }
+                });
 
-            if (populationData == null) {
-                return;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        StringBuilder mpData = new StringBuilder();
+                        for (MunicipalityData data : populationData) {
+                            mpData.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
+                        }
+
+                        String weather = weatherData.getName() + "\n" +
+                                "Sää nyt: " + weatherData.getMain() + " (" + weatherData.getDescription() + ")\n" +
+                                "Lämpötila: " + weatherData.getTemperature() + " K\n" +
+                                "Tuulennopeus: " + weatherData.getWindSpeed() + " m/s\n";
+
+                        // Pass the sorted data to the next activity
+                        intent.putExtra("population", mpData.toString());
+                        intent.putExtra("weatherData", weather);
+
+                        startActivity(intent);
+                    }
+                });
             }
-            runOnUiThread(() -> {
-                StringBuilder stringBuilder = new StringBuilder();
-                for (MunicipalityData data : populationData) {
-                    stringBuilder.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
-                }
-                FragmentPerustiedot fragment = (FragmentPerustiedot) getSupportFragmentManager().findFragmentById(R.id.fragmentPerustiedot);
-                if (fragment != null) {
-                    fragment.updatePopulationData(stringBuilder.toString());
-                }
-            });
         });
 
-        searchTerm = txtKunta.getText().toString().trim();
+        searchTerm = txtMunicipality.getText().toString().trim();
         if (!searchTerm.isEmpty()) {
 
-            SimpleDateFormat sDF = new SimpleDateFormat("hh:mm");
+            SimpleDateFormat sDF = new SimpleDateFormat("HH:mm", Locale.getDefault());
             timeStampString = sDF.format(new Date());
 
 
@@ -103,11 +109,8 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
 
 
             updateRecentSearches();
-            Intent intent = new Intent(this, TabActivity.class);
-            intent.putExtra("SEARCH_TERM", searchTerm);
-            startActivity(intent);
         } else {
-            txtKunta.setError("Please enter a search term");
+            txtMunicipality.setError("Please enter a search term");
         }
     }
     @Override
@@ -126,6 +129,4 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
             recyclerView.setAdapter(new RecentSearchesAdapter(this, recentSearchesData.getSearches(), this));
         }
     }
-
-
 }
