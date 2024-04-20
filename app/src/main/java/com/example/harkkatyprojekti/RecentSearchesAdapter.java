@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,43 +13,47 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecentSearchesAdapter extends RecyclerView.Adapter<RecentSearchesAdapter.SearchViewHolder> {
+public class RecentSearchesAdapter extends RecyclerView.Adapter<SearchViewHolder> {
     private Context context;
-    private final ArrayList<String> recentSearches;
-    private final LayoutInflater mInflater;
+    private final ArrayList<Search> recentSearches;
+    private String cityName;
 
-    public RecentSearchesAdapter(Context context, List<String> recentSearches) {
+    private OnItemClickListener listener;
+
+
+
+    public RecentSearchesAdapter(Context context, ArrayList<Search> searches, OnItemClickListener listener) {
         this.context = context;
-        mInflater = LayoutInflater.from(context);
-        this.recentSearches = (ArrayList<String>) recentSearches;
+        this.recentSearches = searches;
+        this.listener = listener;
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(String cityName);
+    }
+
 
     @NonNull
     @Override
     public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.item_recent_search, parent, false);
-        return new SearchViewHolder(itemView);
+        return new SearchViewHolder(LayoutInflater.from(context).inflate(R.layout.item_recent_search, parent, false));
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        String searchTerm = recentSearches.get(position);
-        Log.d("RecentSearchAdapter", "Binding view holder for position " + position + " with search term: " + searchTerm);
-        holder.searchTextView.setText(searchTerm);
+
+        Search search = recentSearches.get(position);
+        holder.timeStampTextView.setText(recentSearches.get(position).getTimeStampString());
+        holder.searchTextView.setText(recentSearches.get(position).getCityName());
+
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(search.getCityName()));
+
+
+
     }
 
     @Override
     public int getItemCount() {
         return recentSearches.size();
-    }
-
-    static class SearchViewHolder extends RecyclerView.ViewHolder {
-        TextView searchTextView;
-
-        SearchViewHolder(View itemView) {
-            super(itemView);
-            searchTextView = itemView.findViewById(R.id.txtRecentSearch);
-        }
     }
 }

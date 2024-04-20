@@ -17,7 +17,7 @@ public class FragmentPerustiedot extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perus_tiedot, container, false);
-        textViewPopulation = view.findViewById(R.id.textPopulation);
+        textViewPopulation = view.findViewById(R.id.txtPopulation);
         return view;
     }
     public void updatePopulationData(String data) {

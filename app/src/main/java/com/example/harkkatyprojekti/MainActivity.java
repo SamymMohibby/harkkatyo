@@ -4,20 +4,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecentSearchesAdapter.OnItemClickListener{
     private EditText txtKunta;
     private RecyclerView recyclerView;
     private RecentSearchesAdapter adapter; // Ensure this is the adapter you use everywhere in this class
-    private List<String> recentSearchList;
+
+    private String timeStampString;
+
+    private String location ;
+    private RecentSearchesData recentSearchesData;
+    private Button buttonSearch;
+    private String searchTerm;
+
 
 
     @Override
@@ -27,24 +41,26 @@ public class MainActivity extends AppCompatActivity {
 
         txtKunta = findViewById(R.id.txtKunta);
         recyclerView = findViewById(R.id.rvViimeksiHaetut);
-        adapter = new RecentSearchesAdapter(this, recentSearchList);
-        recyclerView.setAdapter(adapter);
+
+        buttonSearch = findViewById(R.id.btnHaeTiedot);
 
 
-        // Initialize the recentSearchList from SharedPreferences
-        recentSearchList = PreferencesUtil.getRecentSearches(this);
-        if (recentSearchList == null) {
-            recentSearchList = new ArrayList<>(); // Initialize as empty if null
-        }
+
+        updateRecentSearches();
+
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MainActivity.this, "Nappia painettu!", Toast.LENGTH_SHORT).show();
+                switchToTabactivity();
+            }
+        });
 
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        adapter = new RecentSearchesAdapter(this, recentSearchList);
-        recyclerView.setAdapter(adapter);
     }
 
-    public void switchToTabactivity(View view) {
+    public void switchToTabactivity() {
+
 
         // dadada
         Context context = this;
@@ -52,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         MunicipalityDataRetriever mr = new MunicipalityDataRetriever();
         WeatherDataRetriever wr = new WeatherDataRetriever();
 
-        String location = txtKunta.getText().toString();
+         location = txtKunta.getText().toString().trim();
 
         ExecutorService service = Executors.newSingleThreadExecutor();
 
@@ -75,9 +91,18 @@ public class MainActivity extends AppCompatActivity {
             });
         });
 
-        String searchTerm = txtKunta.getText().toString().trim();
+        searchTerm = txtKunta.getText().toString().trim();
         if (!searchTerm.isEmpty()) {
-            updateRecentSearches(searchTerm);
+
+            SimpleDateFormat sDF = new SimpleDateFormat("hh:mm");
+            timeStampString = sDF.format(new Date());
+
+
+            Search search = new Search(location, timeStampString);
+            RecentSearchesData.getInstance().addSearch(search);
+
+
+            updateRecentSearches();
             Intent intent = new Intent(this, TabActivity.class);
             intent.putExtra("SEARCH_TERM", searchTerm);
             startActivity(intent);
@@ -85,15 +110,22 @@ public class MainActivity extends AppCompatActivity {
             txtKunta.setError("Please enter a search term");
         }
     }
+    @Override
+    public void onItemClick(String cityName) {
+        location = cityName;
+        searchTerm = cityName;
 
-    private void updateRecentSearches(String searchTerm) {
-        recentSearchList.add(0, searchTerm);
-
-        // Limit to any number of recent searches you prefer, here no limit
-        if (recentSearchList.size() > 10) {
-            recentSearchList.remove(10);
-        }
-        PreferencesUtil.saveRecentSearches(this, recentSearchList);
-        adapter.notifyDataSetChanged();
+        switchToTabactivity();
     }
+    private void updateRecentSearches() {
+
+
+        if (recyclerView != null) {
+            recentSearchesData = RecentSearchesData.getInstance();
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(new RecentSearchesAdapter(this, recentSearchesData.getSearches(), this));
+        }
+    }
+
+
 }
