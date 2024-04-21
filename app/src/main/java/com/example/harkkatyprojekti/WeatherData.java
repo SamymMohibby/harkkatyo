@@ -1,5 +1,9 @@
 package com.example.harkkatyprojekti;
 
+import android.util.Log;
+
+import java.util.Locale;
+
 public class WeatherData {
     private String name;
     private String main;
@@ -13,7 +17,22 @@ public class WeatherData {
         description = d;
         temperature = t;
         windSpeed = w;
+    }
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
 
+    public String getTemperatureCelsius() {
+        try {
+            // Switches from kelvin to celsius
+            double kelvin = Double.parseDouble(temperature);
+            double celsius = kelvin - 273.15;
+            // Rounds it and changes it to String
+            return String.format(Locale.getDefault(), "%.2f", celsius);
+        } catch (NumberFormatException e) {
+            Log.e("WeatherData", "Failed to parse temperature", e);
+            return "N/A"; //
+        }
     }
 
     public String getName() {
@@ -44,9 +63,6 @@ public class WeatherData {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
-    }
 
     public String getWindSpeed() {
         return windSpeed;
