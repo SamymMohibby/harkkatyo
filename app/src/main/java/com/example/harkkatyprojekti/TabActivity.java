@@ -16,6 +16,10 @@ public class TabActivity extends AppCompatActivity {
     // new
     private String changesData;
 
+    // new 2
+
+    private String employmentData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,9 @@ public class TabActivity extends AppCompatActivity {
         weatherData = getIntent().getStringExtra("weatherData");
         // new
         changesData = getIntent().getStringExtra("populationChanges");
+
+        // new 2
+        employmentData = getIntent().getStringExtra("employmentRate");
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -73,6 +80,10 @@ public class TabActivity extends AppCompatActivity {
     // new
     public String sendChangesData() {
         return changesData;
+    }
+
+    public String sendEmploymentData() {
+        return employmentData;
     }
 
 }

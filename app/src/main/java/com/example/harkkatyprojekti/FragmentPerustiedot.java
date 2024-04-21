@@ -19,6 +19,11 @@ public class FragmentPerustiedot extends Fragment {
     // new
     private TextView textViewPopulationChanges;
 
+    // new 2
+
+    private TextView textViewEmploymentRate;
+
+
     private TextView textMunicipalityName;
 
     private TabActivity activity;
@@ -39,8 +44,12 @@ public class FragmentPerustiedot extends Fragment {
         // new
         String changesData = activity.sendChangesData();
 
+        // new2
+        String employmentData = activity.sendEmploymentData();
+
         textViewPopulation = view.findViewById(R.id.textPopulation);
         textViewPopulation.setText(municipalityData);
+
 
         textMunicipalityName = view.findViewById(R.id.txtMunicipalityName);
 
@@ -51,6 +60,10 @@ public class FragmentPerustiedot extends Fragment {
         textViewPopulationChanges = view.findViewById(R.id.populationChanges);
         textViewPopulationChanges.setText(changesData);
 
+        // new2
+        textViewEmploymentRate = view.findViewById(R.id.textEmploymentRate);
+        textViewEmploymentRate.setText(employmentData);
+
 
         activity = (TabActivity) getActivity();
         if (activity != null) {
@@ -60,6 +73,8 @@ public class FragmentPerustiedot extends Fragment {
             textMunicipalityName.setText(activity.getMunicipalityName());
             // new
             textViewPopulationChanges.setText(activity.sendChangesData());
+            // new 2
+            textViewEmploymentRate.setText(activity.sendEmploymentData());
 
             Log.d("FragmentPerustiedot", "Activity and data found: " + mName);
         } else {
