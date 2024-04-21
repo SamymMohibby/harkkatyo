@@ -84,13 +84,14 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                 Collections.sort(populationData, new Comparator<MunicipalityData>() {
                     @Override
                     public int compare(MunicipalityData md1, MunicipalityData md2) {
-                        return Integer.compare(md2.getYear(), md1.getYear()); // Note the order of md2 and md1 is switched
+                        return Integer.compare(md2.getYear(), md1.getYear()); // Note the order of md2 and md1 is switched. This is cuz, we want to list the more relevant years (the latest ones).
+                        //Otherwise the list datalist would be too long.
                     }
                 });
                 Collections.sort(populationChangesData, new Comparator<PopulationChangesData>() {
                     @Override
                     public int compare(PopulationChangesData pcd1, PopulationChangesData pcd2) {
-                        return Integer.compare(pcd2.getYear(), pcd1.getYear()); // Descending order
+                        return Integer.compare(pcd2.getYear(), pcd1.getYear()); // Descending order here as well
                     }
                 });
 
@@ -113,10 +114,9 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                                 "Lämpötila: " + weatherData.getTemperature() + " K\n" +
                                 "Tuulennopeus: " + weatherData.getWindSpeed() + " m/s\n";
 
-                        // Pass the sorted data to the next activity
+
                         intent.putExtra("population", mpData.toString());
                         intent.putExtra("weatherData", weather);
-
                         // new
                         intent.putExtra("populationChanges", pcData.toString());
 
