@@ -34,11 +34,10 @@
         tools:text="Kunta Wikipediassa:" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/textChanges"
+        android:layout_width="279dp"
+        android:layout_height="23dp"
         android:layout_marginTop="256dp"
-        android:text="Poliittinen jakauma:"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -60,11 +59,12 @@
         android:id="@+id/textWeather"
         android:layout_width="102dp"
         android:layout_height="144dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="48dp"
         android:hint="sää"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
         android:layout_width="241dp"
@@ -99,7 +99,9 @@
             android:hint="Asukasmäärä"
             android:text="Asukasmäärä:"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="3dp" />
+            tools:layout_editor_absoluteX="3dp"
+            tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -111,4 +113,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="156dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="276dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/populationChanges"
+            android:layout_width="143dp"
+            android:layout_height="196dp"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="6dp"
+            tools:layout_editor_absoluteY="4dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

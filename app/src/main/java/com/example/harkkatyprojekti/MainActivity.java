@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
         Context context = this;
         MunicipalityDataRetriever mr = new MunicipalityDataRetriever();
         WeatherDataRetriever wr = new WeatherDataRetriever();
+        // new
+        PopulationChangesDataRetriever pcd = new PopulationChangesDataRetriever();
+
         location = txtMunicipality.getText().toString().trim();
         intent.putExtra("MUNICIPALITY_NAME", location);
         Log.d("MainActivity", "Municipality Name to pass: " + location);
@@ -63,11 +66,22 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
             @Override
             public void run() {
                 ArrayList<MunicipalityData> populationData = mr.getData(context, location);
+
+                // new
+                ArrayList<PopulationChangesData> populationChangesData = pcd.getData(context, location);
+
                 WeatherData weatherData = wr.getWeatherData(location);
 
                 if (populationData == null) {
                     return;
                 }
+
+                // new
+                if (populationChangesData == null) {
+                    return;
+                }
+
+
                 // Sort the population data in descending order by year
                 Collections.sort(populationData, new Comparator<MunicipalityData>() {
                     @Override
@@ -84,6 +98,12 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                             mpData.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
                         }
 
+                        // new
+                        StringBuilder pcData = new StringBuilder();
+                        for (PopulationChangesData data : populationChangesData) {
+                            pcData.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
+                        }
+
                         String weather = weatherData.getName() + "\n" +
                                 "Sää nyt: " + weatherData.getMain() + " (" + weatherData.getDescription() + ")\n" +
                                 "Lämpötila: " + weatherData.getTemperature() + " K\n" +
@@ -92,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                         // Pass the sorted data to the next activity
                         intent.putExtra("population", mpData.toString());
                         intent.putExtra("weatherData", weather);
+
+                        // new
+                        intent.putExtra("populationChanges", pcData.toString());
 
                         startActivity(intent);
                     }

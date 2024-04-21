@@ -13,6 +13,9 @@ public class TabActivity extends AppCompatActivity {
     private String weatherData;
     private String municipalityName;
 
+    // new
+    private String changesData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,8 @@ public class TabActivity extends AppCompatActivity {
 
         municipalityData = getIntent().getStringExtra("population");
         weatherData = getIntent().getStringExtra("weatherData");
+        // new
+        changesData = getIntent().getStringExtra("populationChanges");
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -65,4 +70,9 @@ public class TabActivity extends AppCompatActivity {
     public String sendWeatherData() {
         return weatherData;
     }
+    // new
+    public String sendChangesData() {
+        return changesData;
+    }
+
 }
