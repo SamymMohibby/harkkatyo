@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
             public void run() {
                 ArrayList<MunicipalityData> populationData = mr.getData(context, location);
 
+
                 // new
                 ArrayList<PopulationChangesData> populationChangesData = pcd.getData(context, location);
 
@@ -75,18 +76,21 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                 if (populationData == null) {
                     return;
                 }
-
                 // new
                 if (populationChangesData == null) {
                     return;
                 }
-
-
                 // Sort the population data in descending order by year
                 Collections.sort(populationData, new Comparator<MunicipalityData>() {
                     @Override
                     public int compare(MunicipalityData md1, MunicipalityData md2) {
                         return Integer.compare(md2.getYear(), md1.getYear()); // Note the order of md2 and md1 is switched
+                    }
+                });
+                Collections.sort(populationChangesData, new Comparator<PopulationChangesData>() {
+                    @Override
+                    public int compare(PopulationChangesData pcd1, PopulationChangesData pcd2) {
+                        return Integer.compare(pcd2.getYear(), pcd1.getYear()); // Descending order
                     }
                 });
 
