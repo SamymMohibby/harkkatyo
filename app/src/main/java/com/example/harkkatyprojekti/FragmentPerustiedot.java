@@ -23,6 +23,9 @@ public class FragmentPerustiedot extends Fragment {
 
     private TextView textViewEmploymentRate;
 
+    // new 3
+    private TextView textViewJobSelf;
+
 
     private TextView textMunicipalityName;
 
@@ -47,6 +50,9 @@ public class FragmentPerustiedot extends Fragment {
         // new2
         String employmentData = activity.sendEmploymentData();
 
+        // new3
+        String jobselfData = activity.sendJobSelfData();
+
         textViewPopulation = view.findViewById(R.id.textPopulation);
         textViewPopulation.setText(municipalityData);
 
@@ -64,6 +70,10 @@ public class FragmentPerustiedot extends Fragment {
         textViewEmploymentRate = view.findViewById(R.id.textEmploymentRate);
         textViewEmploymentRate.setText(employmentData);
 
+        // new 3
+        textViewJobSelf = view.findViewById(R.id.textJobSufficiency);
+        textViewJobSelf.setText(jobselfData);
+
 
         activity = (TabActivity) getActivity();
         if (activity != null) {
@@ -75,6 +85,9 @@ public class FragmentPerustiedot extends Fragment {
             textViewPopulationChanges.setText(activity.sendChangesData());
             // new 2
             textViewEmploymentRate.setText(activity.sendEmploymentData());
+
+            // new 3
+            textViewJobSelf.setText(activity.sendJobSelfData());
 
             Log.d("FragmentPerustiedot", "Activity and data found: " + mName);
         } else {

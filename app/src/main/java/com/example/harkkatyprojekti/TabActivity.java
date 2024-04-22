@@ -20,6 +20,9 @@ public class TabActivity extends AppCompatActivity {
 
     private String employmentData;
 
+    // new 3
+    private String jobSelfData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,9 @@ public class TabActivity extends AppCompatActivity {
 
         // new 2
         employmentData = getIntent().getStringExtra("employmentRate");
+
+        // new 3
+        jobSelfData = getIntent().getStringExtra("jobSelfSufficiency");
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -84,6 +90,11 @@ public class TabActivity extends AppCompatActivity {
 
     public String sendEmploymentData() {
         return employmentData;
+    }
+
+    // new 3
+    public String sendJobSelfData() {
+        return jobSelfData;
     }
 
 }

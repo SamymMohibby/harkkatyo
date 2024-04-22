@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
         // new2
         EmploymentRateDataRetriever erd = new EmploymentRateDataRetriever();
 
+        // new3
+        JobSelfSufficiencyRetriever jsf = new JobSelfSufficiencyRetriever();
+
         location = txtMunicipality.getText().toString().trim();
         intent.putExtra("MUNICIPALITY_NAME", location);
         Log.d("MainActivity", "Municipality Name to pass: " + location);
@@ -77,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                 // new2
                 ArrayList<EmploymentRateData> employmentRateData = erd.getData(context, location);
 
+                // new3
+                ArrayList<JobSelfSufficiency> jobSelfSufficiencyData = jsf.getData(context, location);
+
                 WeatherData weatherData = wr.getWeatherData(location);
 
                 if (populationData == null) {
@@ -92,6 +98,12 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                     return;
                 }
 
+                // new 3
+                if (jobSelfSufficiencyData == null) {
+                    return;
+                }
+
+
                 // Sort the population data in descending order by year
                 Collections.sort(populationData, new Comparator<MunicipalityData>() {
                     @Override
@@ -100,6 +112,13 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                         //Otherwise the list datalist would be too long.
                     }
                 });
+                Collections.sort(populationChangesData, new Comparator<PopulationChangesData>() {
+                    @Override
+                    public int compare(PopulationChangesData pcd1, PopulationChangesData pcd2) {
+                        return Integer.compare(pcd2.getYear(), pcd1.getYear()); // Descending order here as well
+                    }
+                });
+                // new
                 Collections.sort(populationChangesData, new Comparator<PopulationChangesData>() {
                     @Override
                     public int compare(PopulationChangesData pcd1, PopulationChangesData pcd2) {
@@ -128,6 +147,14 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                             erData.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
                         }
 
+                        // new 3
+
+                        StringBuilder jsData = new StringBuilder();
+                        for (JobSelfSufficiency data : jobSelfSufficiencyData) {
+                            jsData.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
+                        }
+
+
 
                         String weather = weatherData.getName() + "\n" +
                                 "Sää nyt: " + weatherData.getMain() + " (" + weatherData.getDescription() + ")\n" +
@@ -142,6 +169,9 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
 
                         // new 2
                         intent.putExtra("employmentRate", erData.toString());
+
+                        // new 3
+                        intent.putExtra("jobSelfSufficiency", jsData.toString());
 
                         startActivity(intent);
                     }
