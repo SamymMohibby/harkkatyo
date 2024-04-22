@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     android:padding="16dp"
     tools:context=".MainActivity">
 
@@ -14,16 +15,18 @@
         android:id="@+id/txtMunicipality"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Kunta"
+        android:fontFamily="@font/librebaskervilleregular"
+        android:textColor="@color/white"
+        android:hint="Municipality name"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <Button
         android:id="@+id/btnHaeTiedot"
+        android:fontFamily="@font/librebaskervilleregular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -38,7 +41,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Viimeksi haetut kunnat"
+        android:text="Recent searches"
+        android:fontFamily="@font/librebaskervilleregular"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

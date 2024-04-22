@@ -5,7 +5,6 @@
     android:id="@+id/itemRecent"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/cardview_light_background"
     android:backgroundTint="#FFFFFF"
     android:orientation="vertical"
     android:padding="16dp">
@@ -19,16 +18,21 @@
         android:gravity="center"
         android:text="Teksti"
         android:textSize="20dp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintVertical_bias="0.473"
+        android:fontFamily="@font/librebaskervilleregular"
+        />
 
     <TextView
         android:id="@+id/textTimeStamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aika"
+        android:textColor="@color/white"
+        android:fontFamily="@font/librebaskervilleregular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.965"
         app:layout_constraintStart_toStartOf="parent"

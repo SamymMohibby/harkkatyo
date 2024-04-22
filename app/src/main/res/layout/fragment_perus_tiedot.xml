@@ -5,6 +5,7 @@
     android:id="@+id/fragmentPerustiedot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background2"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -12,22 +13,27 @@
         android:id="@+id/txtMunicipalityName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="24sp"
+        android:gravity="left"
+        android:textSize="28sp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        />
 
 
     <TextView
         android:id="@+id/textWeather"
-        android:layout_width="143dp"
-        android:layout_height="196dp"
+        android:layout_width="142dp"
+        android:layout_height="143dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="44dp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:hint="sää"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
 
@@ -36,39 +42,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/librebaskervilleregular"
+        android:textColor="@color/white"
         android:text="Population:"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
 
     <TextView
         android:id="@+id/textEmploymentRate"
-        android:layout_width="143dp"
-        android:layout_height="196dp"
-        android:layout_marginTop="276dp"
-        android:layout_marginEnd="36dp"
+        android:layout_width="133dp"
+        android:layout_height="144dp"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="44dp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:text="TextView"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
 
     <TextView
         android:id="@+id/populationChanges"
-        android:layout_width="143dp"
-        android:layout_height="196dp"
+        android:layout_width="135dp"
+        android:layout_height="144dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="276dp"
+        android:layout_marginTop="236dp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:text="TextView"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
 
     <TextView
         android:id="@+id/textPopulation"
-        android:layout_width="143dp"
-        android:layout_height="196dp"
+        android:layout_width="126dp"
+        android:layout_height="144dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:hint="Asukasmäärä"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName"
         tools:ignore="MissingConstraints" />
@@ -78,8 +93,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="128dp"
+        android:layout_marginEnd="96dp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:text="Weather:"
+        android:textColor="@color/white"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
 
@@ -90,39 +108,49 @@
         android:layout_marginStart="8dp"
         android:text="Population change:"
         app:layout_constraintBottom_toTopOf="@+id/populationChanges"
+        android:fontFamily="@font/librebaskervilleregular"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPopulation"
-        app:layout_constraintVertical_bias="0.172" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName"
+        app:layout_constraintVertical_bias="0.977" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="208dp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:text="Employment rate:"
-        app:layout_constraintBottom_toTopOf="@+id/textEmploymentRate"
+        android:textSize="18dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="516dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginTop="408dp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:text="Job self-sufficiency:"
+        android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtMunicipalityName" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
 
     <TextView
         android:id="@+id/textJobSufficiency"
-        android:layout_width="151dp"
-        android:layout_height="168dp"
-        android:layout_marginTop="512dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="120dp"
+        android:layout_height="156dp"
+        android:layout_marginTop="452dp"
+        android:fontFamily="@font/librebaskervilleregular"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
