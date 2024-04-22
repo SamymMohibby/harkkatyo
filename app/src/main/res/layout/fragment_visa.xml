@@ -17,14 +17,14 @@
 
     <TextView
         android:id="@+id/textQuestion"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:text="Question appears here"
-        android:gravity="center"
-        android:textSize="18sp"
+        android:layout_width="369dp"
+        android:layout_height="90dp"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
-        android:padding="10dp"/>
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Question appears here"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnOption1"
