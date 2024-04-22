@@ -119,10 +119,18 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                     }
                 });
                 // new
-                Collections.sort(populationChangesData, new Comparator<PopulationChangesData>() {
+                Collections.sort(jobSelfSufficiencyData, new Comparator<JobSelfSufficiency>() {
                     @Override
-                    public int compare(PopulationChangesData pcd1, PopulationChangesData pcd2) {
-                        return Integer.compare(pcd2.getYear(), pcd1.getYear()); // Descending order here as well
+                    public int compare(JobSelfSufficiency js1, JobSelfSufficiency js2) {
+                        // Descending order
+                        return Integer.compare(js2.getYear(), js1.getYear());
+                    }
+                });
+                Collections.sort(employmentRateData, new Comparator<EmploymentRateData>() {
+                    @Override
+                    public int compare(EmploymentRateData er1, EmploymentRateData er2) {
+                        // Descending order
+                        return Integer.compare(er2.getYear(), er1.getYear());
                     }
                 });
 

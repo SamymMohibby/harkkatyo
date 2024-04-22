@@ -56,8 +56,8 @@
         android:id="@+id/populationChanges"
         android:layout_width="143dp"
         android:layout_height="196dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="336dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="276dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName" />
@@ -87,13 +87,12 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginStart="8dp"
         android:text="Population change:"
         app:layout_constraintBottom_toTopOf="@+id/populationChanges"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMunicipalityName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textPopulation"
+        app:layout_constraintVertical_bias="0.172" />
 
     <TextView
         android:id="@+id/textView8"
