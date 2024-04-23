@@ -40,13 +40,19 @@ public class RecentSearchesAdapter extends RecyclerView.Adapter<SearchViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchViewHolder holder, final int position) {
+        final Search search = recentSearches.get(position);
+        holder.timeStampTextView.setText(search.getTimeStampString());
+        holder.searchTextView.setText(search.getCityName());
 
-        Search search = recentSearches.get(position);
-        holder.timeStampTextView.setText(recentSearches.get(position).getTimeStampString());
-        holder.searchTextView.setText(recentSearches.get(position).getCityName());
-
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(search.getCityName()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(recentSearches.get(position).getCityName());
+                }
+            }
+        });
 
 
 

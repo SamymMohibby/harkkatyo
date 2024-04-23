@@ -38,10 +38,6 @@
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_perus_tiedot, container, false);
 
-
-
-
-
             TabActivity activity = (TabActivity) getActivity();
             String municipalityData = activity.sendMpData();
             String weatherData = activity.sendWeatherData();
@@ -99,8 +95,5 @@
             return view;
 
 
-
-
         }
-
     }

@@ -41,65 +41,45 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToTabactivity();
+                String currentSearchTerm = txtMunicipality.getText().toString().trim();
+                if (!currentSearchTerm.isEmpty()) {
+                    switchToTabactivity(currentSearchTerm);
+                } else {
+                    txtMunicipality.setError("Please enter a search term");
+                }
             }
         });
 
 
+
     }
-    public void switchToTabactivity() {
+    protected void onResume() {
+        super.onResume();
+        updateRecentSearches(); // This ensures your list is updated when returning to the activity
+    }
+    public void switchToTabactivity(String cityName) {
         Intent intent = new Intent(this, TabActivity.class);
         Context context = this;
+        intent.putExtra("MUNICIPALITY_NAME", cityName);
+        Log.d("MainActivity", "Municipality Name to pass: " + cityName);
         MunicipalityDataRetriever mr = new MunicipalityDataRetriever();
         WeatherDataRetriever wr = new WeatherDataRetriever();
-        // new
         PopulationChangesDataRetriever pcd = new PopulationChangesDataRetriever();
-
-        // new2
         EmploymentRateDataRetriever erd = new EmploymentRateDataRetriever();
-
-        // new3
         JobSelfSufficiencyRetriever jsf = new JobSelfSufficiencyRetriever();
-
-        location = txtMunicipality.getText().toString().trim();
-        intent.putExtra("MUNICIPALITY_NAME", location);
-        Log.d("MainActivity", "Municipality Name to pass: " + location);
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new Runnable() {
             @Override
             public void run() {
-                ArrayList<MunicipalityData> populationData = mr.getData(context, location);
+                ArrayList<MunicipalityData> populationData = mr.getData(context, cityName);
+                ArrayList<PopulationChangesData> populationChangesData = pcd.getData(context, cityName);
+                ArrayList<EmploymentRateData> employmentRateData = erd.getData(context, cityName);
+                ArrayList<JobSelfSufficiency> jobSelfSufficiencyData = jsf.getData(context, cityName);
+                WeatherData weatherData = wr.getWeatherData(cityName);
 
-
-                // new
-                ArrayList<PopulationChangesData> populationChangesData = pcd.getData(context, location);
-
-                // new2
-                ArrayList<EmploymentRateData> employmentRateData = erd.getData(context, location);
-
-                // new3
-                ArrayList<JobSelfSufficiency> jobSelfSufficiencyData = jsf.getData(context, location);
-
-                WeatherData weatherData = wr.getWeatherData(location);
-
-                if (populationData == null) {
-                    return;
+                if (populationData == null || populationChangesData == null || employmentRateData == null || jobSelfSufficiencyData == null) {
+                    return;  // Properly handle null responses from data retrievers
                 }
-                // new
-                if (populationChangesData == null) {
-                    return;
-                }
-
-                // new 2
-                if (employmentRateData == null) {
-                    return;
-                }
-
-                // new 3
-                if (jobSelfSufficiencyData == null) {
-                    return;
-                }
-
 
                 // Sort the population data in descending order by year
                 Collections.sort(populationData, new Comparator<MunicipalityData>() {
@@ -160,33 +140,21 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
 
 
                         intent.putExtra("population", mpData.toString());
-                        intent.putExtra("weatherData", weather);
-                        // new
+                        intent.putExtra("weatherData", weather.toString());
                         intent.putExtra("populationChanges", pcData.toString());
-
-                        // new 2
                         intent.putExtra("employmentRate", erData.toString());
-
-                        // new 3
                         intent.putExtra("jobSelfSufficiency", jsData.toString());
-
                         startActivity(intent);
                     }
                 });
             }
         });
 
-        searchTerm = txtMunicipality.getText().toString().trim();
-        if (!searchTerm.isEmpty()) {
-
+        if (!cityName.isEmpty()) {
             SimpleDateFormat sDF = new SimpleDateFormat("HH:mm", Locale.getDefault());
             timeStampString = sDF.format(new Date());
-
-
-            Search search = new Search(location, timeStampString);
+            Search search = new Search(cityName, timeStampString);
             RecentSearchesData.getInstance().addSearch(search);
-
-
             updateRecentSearches();
         } else {
             txtMunicipality.setError("Please enter a search term");
@@ -194,10 +162,7 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
     }
     @Override
     public void onItemClick(String cityName) {
-        location = cityName;
-        searchTerm = cityName;
-
-        switchToTabactivity();
+        switchToTabactivity(cityName);
     }
     private void updateRecentSearches() {
 

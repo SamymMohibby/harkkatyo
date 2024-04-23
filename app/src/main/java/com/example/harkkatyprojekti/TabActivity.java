@@ -73,7 +73,7 @@ public class TabActivity extends AppCompatActivity {
         });
     }
     public String getMunicipalityName() {
-        return municipalityName;
+        return getIntent().getStringExtra("MUNICIPALITY_NAME");
     }
 
     public String sendMpData() {

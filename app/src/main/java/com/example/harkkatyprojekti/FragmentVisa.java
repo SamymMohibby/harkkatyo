@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
   /* kysymykset:
@@ -111,14 +115,18 @@ public class FragmentVisa extends Fragment {
     private String[] generateAnswers() {
         String[] answers = new String[4];
         int correctPosition = random.nextInt(4);
-        for (int i = 0; i < 4; i++) {
-            if (i == correctPosition) {
-                answers[i] = correctAnswers[currentQuestionIndex];
-            } else {
-                int incorrectIndex = random.nextInt(3);
-                answers[i] = incorrectAnswers[currentQuestionIndex][incorrectIndex];
+        // Added this so there is no duplicate answer options:
+        List<String> shuffledIncorrectAnswers = new ArrayList<>(Arrays.asList(incorrectAnswers[currentQuestionIndex]));
+        Collections.shuffle(shuffledIncorrectAnswers);
+
+        answers[correctPosition] = correctAnswers[currentQuestionIndex];
+
+        for (int i = 0, j = 0; i < 4; i++) {
+            if (i != correctPosition) {
+                answers[i] = shuffledIncorrectAnswers.get(j++);
             }
         }
+
         return answers;
     }
 
