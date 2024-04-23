@@ -68,10 +68,10 @@ public class FragmentCompare extends Fragment {
 
         ExecutorService service = Executors.newFixedThreadPool(2); // Use two threads for simultaneous fetches
 
-        // eka kunta
+        // first municipality
         service.execute(() -> fetchData(context, location1, txtPopulationData1, txtWeatherData1, txtPopulationChange1, mr, wr, pc));
 
-        // toka kunta
+        // second municipality
         service.execute(() -> fetchData(context, location2, txtPopulationData2, txtWeatherData2, txtPopulationChange2, mr, wr, pc));
     }
 

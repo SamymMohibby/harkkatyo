@@ -22,18 +22,6 @@ public class WeatherData {
         this.temperature = temperature;
     }
 
-    public String getTemperatureCelsius() {
-        try {
-            // Switches from kelvin to celsius
-            double kelvin = Double.parseDouble(temperature);
-            double celsius = kelvin - 273.15;
-            // Rounds it and changes it to String
-            return String.format(Locale.getDefault(), "%.2f", celsius);
-        } catch (NumberFormatException e) {
-            Log.e("WeatherData", "Failed to parse temperature", e);
-            return "N/A"; //
-        }
-    }
 
     public String getName() {
         return name;
