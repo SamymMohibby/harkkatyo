@@ -1,4 +1,5 @@
 package com.example.harkkatyprojekti;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,11 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,12 +29,10 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
     private String searchTerm;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         txtMunicipality = findViewById(R.id.txtMunicipality);
         recyclerView = findViewById(R.id.rvRecentSearches);
         buttonSearch = findViewById(R.id.btnHaeTiedot);
