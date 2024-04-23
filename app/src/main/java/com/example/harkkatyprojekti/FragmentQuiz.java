@@ -62,7 +62,7 @@ public class FragmentQuiz extends Fragment {
             "Itäväylä",
             "Kaivopuisto",
             "1300",
-            "213.8 neliö km"
+            "213.8 km²"
     };
 
     private String[][] incorrectAnswers = {
@@ -75,7 +75,7 @@ public class FragmentQuiz extends Fragment {
             {"Mannerheimintie", "Pasilanväylä", "Kehä I"},
             {"Töölö", "Eira", "Vallila"},
             {"800", "500", "2000"},
-            {"100", "320.5", "250"}
+            {"100 km²", "320.5 km²", "250 km²"}
     };
 
     private Random random = new Random();
