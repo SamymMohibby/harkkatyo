@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
     }
     protected void onResume() {
         super.onResume();
-        updateRecentSearches(); // This ensures your list is updated when returning to the activity
+        updateRecentSearches();
     }
     public void switchToTabactivity(String cityName) {
         Intent intent = new Intent(this, TabActivity.class);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                 WeatherData weatherData = wr.getWeatherData(cityName);
 
                 if (populationData == null || populationChangesData == null || employmentRateData == null || jobSelfSufficiencyData == null) {
-                    return;  // Properly handle null responses from data retrievers
+                    return;
                 }
 
                 // Sort the population data in descending order by year
@@ -121,14 +121,19 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
 
                         StringBuilder erData = new StringBuilder();
                         for (EmploymentRateData data : employmentRateData) {
-                            erData.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
+                            // Formatting the population rate to include a percentage sign
+                            erData.append(data.getYear()).append(": ").append(String.format(Locale.US, "%.1f%%", data.getPopulation())).append("\n");
                         }
+
+                        // new 3
+
+
 
                         // new 3
 
                         StringBuilder jsData = new StringBuilder();
                         for (JobSelfSufficiency data : jobSelfSufficiencyData) {
-                            jsData.append(data.getYear()).append(": ").append(data.getPopulation()).append("\n");
+                            jsData.append(data.getYear()).append(": ").append(String.format(Locale.US, "%.1f%%", data.getPopulation())).append("\n");
                         }
 
 

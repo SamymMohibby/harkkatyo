@@ -32,7 +32,7 @@ import java.util.Random;
      */
 
 
-public class FragmentVisa extends Fragment {
+public class FragmentQuiz extends Fragment {
     private TextView textQuestion;
     private Button btnOption1;
     private Button btnOption2;

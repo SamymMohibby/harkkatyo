@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-public class FragmentVertailu extends Fragment {
+public class FragmentCompare extends Fragment {
     private TextView txtPopulationData1, txtWeatherData1, txtPopulationChange1;
     private TextView txtPopulationData2, txtWeatherData2, txtPopulationChange2;
     private EditText editTextLocation1, editTextLocation2;

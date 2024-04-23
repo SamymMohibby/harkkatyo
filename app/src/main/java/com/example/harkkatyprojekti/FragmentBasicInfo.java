@@ -12,7 +12,7 @@
 
 
 
-    public class FragmentPerustiedot extends Fragment {
+    public class FragmentBasicInfo extends Fragment {
         private TextView textViewPopulation;
         private TextView textViewWeather;
 
