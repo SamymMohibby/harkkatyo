@@ -125,9 +125,6 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                             erData.append(data.getYear()).append(": ").append(String.format(Locale.US, "%.1f%%", data.getPopulation())).append("\n");
                         }
 
-                        // new 3
-
-
 
                         // new 3
 

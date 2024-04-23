@@ -2,7 +2,7 @@ package com.example.harkkatyprojekti;
 
 public class EmploymentRateData {
     private int year;
-    private double population; // Using double to handle decimal values
+    private double population;
 
     public EmploymentRateData(int y, double p) {
         year = y;
