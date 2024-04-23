@@ -36,7 +36,7 @@
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_perus_tiedot, container, false);
+            View view = inflater.inflate(R.layout.fragment_basic_info, container, false);
 
             TabActivity activity = (TabActivity) getActivity();
             String municipalityData = activity.sendMpData();
