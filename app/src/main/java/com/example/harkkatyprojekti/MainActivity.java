@@ -101,7 +101,20 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                     public int compare(PopulationChangesData pcd1, PopulationChangesData pcd2) {
                         return Integer.compare(pcd2.getYear(), pcd1.getYear()); // Descending order here as well
                     }
+
                 });
+                Collections.sort(employmentRateData, new Comparator<EmploymentRateData>() {
+                    public int compare(EmploymentRateData erd1, EmploymentRateData erd2) {
+                        return Integer.compare(erd2.getYear(),erd1.getYear());
+                    }
+                });
+                Collections.sort(jobSelfSufficiencyData, new Comparator<JobSelfSufficiencyData>() {
+                    @Override
+                    public int compare(JobSelfSufficiencyData jsf1, JobSelfSufficiencyData jsf2) {
+                        return Integer.compare(jsf2.getYear(), jsf1.getYear());
+                    }
+                });
+
 
                 runOnUiThread(new Runnable() {
                     @Override
