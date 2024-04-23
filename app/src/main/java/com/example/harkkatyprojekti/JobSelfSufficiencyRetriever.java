@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class JobSelfSufficiencyRetriever {
-    public ArrayList<JobSelfSufficiency> getData(Context context, String municipality) {
+    public ArrayList<JobSelfSufficiencyData> getData(Context context, String municipality) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         JsonNode areas = null;
@@ -81,9 +81,9 @@ public class JobSelfSufficiencyRetriever {
                 populations.add(Double.parseDouble(node.asText()));  // Parsing as Double
             }
 
-            ArrayList<JobSelfSufficiency> jobSelfSufficiency = new ArrayList<>();
+            ArrayList<JobSelfSufficiencyData> jobSelfSufficiency = new ArrayList<>();
             for(int i = 0; i < years.size(); i++) {
-                jobSelfSufficiency.add(new JobSelfSufficiency(Integer.valueOf(years.get(i)), populations.get(i)));  // Using double for population
+                jobSelfSufficiency.add(new JobSelfSufficiencyData(Integer.valueOf(years.get(i)), populations.get(i)));  // Using double for population
             }
 
             return jobSelfSufficiency;

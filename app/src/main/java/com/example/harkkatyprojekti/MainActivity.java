@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                 ArrayList<MunicipalityData> populationData = mr.getData(context, cityName);
                 ArrayList<PopulationChangesData> populationChangesData = pcd.getData(context, cityName);
                 ArrayList<EmploymentRateData> employmentRateData = erd.getData(context, cityName);
-                ArrayList<JobSelfSufficiency> jobSelfSufficiencyData = jsf.getData(context, cityName);
+                ArrayList<JobSelfSufficiencyData> jobSelfSufficiencyData = jsf.getData(context, cityName);
                 WeatherData weatherData = wr.getWeatherData(cityName);
 
                 if (populationData == null || populationChangesData == null || employmentRateData == null || jobSelfSufficiencyData == null) {
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements RecentSearchesAda
                         // new 3
 
                         StringBuilder jsData = new StringBuilder();
-                        for (JobSelfSufficiency data : jobSelfSufficiencyData) {
+                        for (JobSelfSufficiencyData data : jobSelfSufficiencyData) {
                             jsData.append(data.getYear()).append(": ").append(String.format(Locale.US, "%.1f%%", data.getPopulation())).append("\n");
                         }
 
